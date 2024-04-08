@@ -68,44 +68,20 @@ export const ex9 = (time: string, add: number): string =>{
     return `${newHours}:${newMinute}:${newSecond}`
 }
 
-interface Obj {
-    name: string,
-    age: number,
-    isStatus: boolean,
-    a: {
-        a: [number, number, number],
-        b: {
-            c: number
-        }
-    },
-    c: ['', '', ''],
-}
-const obj = {
-    name: "trung",
-    age: 18,
-    isStatus: true,
-    a: {
-        a: [1,2,3],
-        b: {
-            c: 2
-        }
-    },
-    c: ['a', 'b', 'c']
 
-}
+export const resetObject = (obj) => {
 
-export const resetObject = (object): Obj => {
-    object.name = ""
-    object.age = 0
-    object.isStatus = false
-    object.c = ['','','']
-    object.a = {
-        a: [0, 0, 0],
-        b: {
-            c: 0
+    for (let key in obj) {
+        if (typeof obj[key] === 'number') {
+            obj[key] = 0;
+        } else if (typeof obj[key] === 'string') {
+            obj[key] = '';
+        } else if (typeof obj[key] === 'object') {
+            obj[key] = resetObject(obj[key]);
         }
     }
-    return object
+    return obj;
+
 }
 
 
